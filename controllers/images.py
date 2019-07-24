@@ -1,9 +1,10 @@
 from flask import Blueprint, jsonify, request
+from webcolors import rgb_to_hex
 from models.image import ImageModel, ImageSchema, Pixel, PixelSchema, ColorSchema
 from models.difficulty import Difficulty
 from lib.manipulation import image_manipulation
 from lib.createpixels import create_pixels
-from lib.colorhistogram import create_colors
+from lib.colorshistogram import create_colors
 
 api = Blueprint('images', __name__)
 image_schema = ImageSchema()
@@ -112,15 +113,14 @@ def generate_colors(image_id):
     color_length = [color_tuple[0]*2.5 for color_tuple in colors_list]
 
     # list of the rgb colors needed for the project
-    colors_list = [str(color_tuple[1]) for color_tuple in colors_list]
+    colors_list = [str(rgb_to_hex(color_tuple[1])) for color_tuple in colors_list]
 
-    for stitches in stitches_count:
-        for length in color_length:
-            for rgb_value in colors_list:
-                color, errors = color_schema.load({'stitches':stitches, 'length': length, 'color':rgb_value})
-                if errors:
-                    return jsonify(errors), 422
-                color.image = image_created
-                color.save()
+    for stitch in stitches_count:
+        i = stitches_count.index(stitch)
+        color, errors = color_schema.load({'stitches':stitch, 'length': color_length[i], 'color': colors_list[i]})
+        if errors:
+            return jsonify(errors), 422
+        color.image = image_created
+        color.save()
 
     return image_schema.jsonify(image_created), 202

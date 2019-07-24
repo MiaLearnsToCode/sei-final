@@ -14,6 +14,8 @@ pyjwt = "*"
 pillow = "*"
 marshmallow-sqlalchemy = "*"
 flask-marshmallow = "*"
+webcolors = "==1.3"
+flask-bcrypt = "*"
 
 [requires]
 python_version = "3.7"
