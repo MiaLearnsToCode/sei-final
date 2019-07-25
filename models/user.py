@@ -40,17 +40,18 @@ class User(db.Model, BaseModel):
 
 class UserSchema(ma.ModelSchema, BaseSchema):
 
+    password = fields.String(required=True)
+    password_confirmation = fields.String(required=True)
+
     @validates_schema
     # pylint: disable=R0201
     def check_passwords_match(self, data):
+        print(data)
         if data.get('password') != data.get('password_confirmation'):
             raise ValidationError(
                 'Password do not match',
                 'password_confirmation'
             )
-    password = fields.String(required=True)
-    password_confirmation = fields.String(required=True)
-
 
     class Meta:
         model = User

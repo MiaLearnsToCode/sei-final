@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, request
 from models.user import User, UserSchema
 
 api = Blueprint('users', __name__)
-user_schema = UserSchema(exclude=('password',))
+user_schema = UserSchema()
 
 @api.route('/register', methods=['POST'])
 def register():

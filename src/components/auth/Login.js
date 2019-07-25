@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 import Auth from '../../lib/Auth'
 
 class Login extends React.Component {
@@ -30,27 +31,29 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div className="form-group">
-        <h2>Sign In</h2>
-        <label className="form-label">Email</label>
-        <input
-          className="form-input"
-          type="text"
-          name="email"
-          placeholder="Email"
-          onChange={this.handleChange}
-        />
-        <label className="form-label">Password</label>
-        <input
-          className="form-input"
-          type="password"
-          name="password"
-          placeholder="Password"
-          onChange={this.handleChange}
-        />
-        <button className="btn btn-primary"> Sign in </button>
-        <p>New here?</p>
-        <a>Register here</a>
+      <div className="form-group" >
+        <form onSubmit={this.handleSubmit}>
+          <h2>Sign In</h2>
+          <label className="form-label">Email</label>
+          <input
+            className="form-input"
+            type="text"
+            name="email"
+            placeholder="Email"
+            onChange={this.handleChange}
+          />
+          <label className="form-label">Password</label>
+          <input
+            className="form-input"
+            type="password"
+            name="password"
+            placeholder="Password"
+            onChange={this.handleChange}
+          />
+          <button className="btn input-group-btn"> Sign in </button>
+          <p>New here?</p>
+          <Link to="/register" className="c-hand">Register here</Link>
+        </form>
       </div>
     )
   }
