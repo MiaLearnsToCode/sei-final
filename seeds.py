@@ -1,5 +1,5 @@
 from app import app, db
-from models.image import ImageModel
+from models.image import ImageModel, Note
 from models.difficulty import Difficulty
 from models.user import UserSchema
 
@@ -32,7 +32,14 @@ with app.app_context():
     easy = Difficulty(level='easy', pixelSize=10)
     medium = Difficulty(level='medium', pixelSize=20)
     hard = Difficulty(level='hard', pixelSize=30)
+
+
     teddy = ImageModel(title='teddy', url='https://pixy.org/src/81/thumbs350/811052.jpg', difficulty=hard, user=mia)
+    teddy_one = ImageModel(title='teddy_one', url='https://pixy.org/src/81/thumbs350/811052.jpg', difficulty=easy, user=mia)
+    teddy_two = ImageModel(title='teddy_two', url='https://pixy.org/src/81/thumbs350/811052.jpg', difficulty=easy, user=sim)
+
+    note = Note(text='finished the first row', image=teddy, user=mia)
+    note_one = Note(text='Ran out of yarn', image=teddy_one, user=mia)
 
     db.session.add(mia)
     db.session.add(sim)
@@ -40,4 +47,8 @@ with app.app_context():
     db.session.add(medium)
     db.session.add(hard)
     db.session.add(teddy)
+    db.session.add(teddy_one)
+    db.session.add(teddy_two)
+    db.session.add(note)
+    db.session.add(note_one)
     db.session.commit()

@@ -25,7 +25,7 @@ class ImageSchema(ma.ModelSchema, BaseSchema):
     colors = fields.Nested('ColorSchema', many=True, exclude=('created_at', 'updated_at'))
     user = fields.Nested('UserSchema', only={'id', 'username'})
     difficulty = fields.Nested('DifficultySchema', only=('id', 'level', 'pixelSize'))
-
+    notes = fields.Nested('NoteSchema', many=True)
 
 class Pixel(db.Model, BaseModel):
 
@@ -56,3 +56,20 @@ class ColorSchema(ma.ModelSchema, BaseSchema):
 
     class Meta:
         model = Color
+
+
+class Note(db.Model, BaseModel):
+
+    __tablename__ = 'notes'
+
+    text = db.Column(db.String(300), nullable=False)
+    image_id = db.Column(db.Integer, db.ForeignKey('images.id'))
+    image = db.relationship('ImageModel', backref='notes')
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user = db.relationship('User', backref='created_notes')
+
+class NoteSchema(ma.ModelSchema, BaseSchema):
+
+    class Meta:
+        model = Note
+    user = fields.Nested('UserSchema', only={'id', 'username'})

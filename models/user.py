@@ -29,7 +29,7 @@ class User(db.Model, BaseModel):
         payload = {
             'exp': datetime.utcnow() + timedelta(days=4),
             'iat': datetime.utcnow(),
-            'sub': self.id
+            'user': self.id
         }
         token = jwt.encode(
             payload,
@@ -56,3 +56,4 @@ class UserSchema(ma.ModelSchema, BaseSchema):
         model = User
         exclude = ('password_hash', )
     created_images = fields.Nested('ImageSchema', many=True, only=('title'))
+    created_notes = fields.Nested('NoteSchema', many=True, only=('text'))
