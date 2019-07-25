@@ -11,6 +11,8 @@ import Footer from './components/common/Footer'
 import Login from './components/auth/Login'
 import Register from './components/auth/Register'
 
+import Index from './components/images/Index'
+
 class App extends React.Component {
   render() {
     return (
@@ -18,6 +20,7 @@ class App extends React.Component {
         <div>
           <Navbar />
           <Switch>
+            <Route path='/dashboard' component={Index}/>
             <Route path='/register' component={Register}/>
             <Route exact path='/' component={Login}/>
           </Switch>
