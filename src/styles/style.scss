@@ -8,5 +8,43 @@ $asphalt: #34495E;
 
 body {
   background-color: $dark-color;
+  color: $primary-color;
   font-family: 'Quicksand', sans-serif;
+}
+
+nav {
+  img {
+    height: 60px;
+  }
+}
+
+.btn {
+  background-color: $asphalt;
+}
+
+.btn:hover {
+  background-color: $primary-color;
+  color: $dark-color;
+}
+
+a:hover {
+  text-decoration: none;
+
+}
+
+.empty-state {
+  background-color: $asphalt;
+  text-align: center;
+}
+
+.chip {
+  color: $dark-color;
+  padding: 10px;
+}
+
+.panel {
+  margin: 10px;
+  background-color: $asphalt;
+  border-width: 3px;
+  border-radius: 10px;
 }

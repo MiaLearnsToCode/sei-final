@@ -31,29 +31,35 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div className="form-group" >
-        <form onSubmit={this.handleSubmit}>
-          <h2>Sign In</h2>
-          <label className="form-label">Email</label>
-          <input
-            className="form-input"
-            type="text"
-            name="email"
-            placeholder="Email"
-            onChange={this.handleChange}
-          />
-          <label className="form-label">Password</label>
-          <input
-            className="form-input"
-            type="password"
-            name="password"
-            placeholder="Password"
-            onChange={this.handleChange}
-          />
-          <button className="btn input-group-btn"> Sign in </button>
-          <p>New here?</p>
-          <Link to="/register" className="c-hand">Register here</Link>
-        </form>
+      <div className="container columns">
+        <div className="column col-6">
+          <h1>Yarn: Embroidery Made Simple</h1>
+          <p>Turn any image into an embroidery friendly design & keep track of your progress.</p>
+        </div>
+        <div className="form-group column col-4" >
+          <form onSubmit={this.handleSubmit}>
+            <h2>Sign In</h2>
+            <label className="form-label">Email</label>
+            <input
+              className="form-input"
+              type="text"
+              name="email"
+              placeholder="Email"
+              onChange={this.handleChange}
+            />
+            <label className="form-label">Password</label>
+            <input
+              className="form-input"
+              type="password"
+              name="password"
+              placeholder="Password"
+              onChange={this.handleChange}
+            />
+            <button className="btn input-group-btn"> Sign in </button>
+            <p>New here?</p>
+            <Link to="/register" className="c-hand">Register here</Link>
+          </form>
+        </div>
       </div>
     )
   }

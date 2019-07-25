@@ -38,22 +38,27 @@ class Navbar extends React.Component{
           <section className="navbar-section">
           </section>
           <section className="navbar-center">
-            <a href="#" className="btn btn-link">YARN</a>
+            <Link to='/' className="c-hand">
+              <img src="https://media2.giphy.com/media/j6e8XZajQJhYKm1XEx/giphy.gif?cid=790b76115d39be776d4f546e55ff2fc6&rid=giphy.gif" />
+            </Link>
           </section>
           <section className="navbar-section">
           </section>
         </nav>
         {
           Auth.isAuthenticated() &&
-          <div className="navbar">
-            <section className="navbar-section">
-              <Link to="/dashboard" className="btn btn-link">DASHBOARD</Link>
-            </section>
-            <section className="navbar-center">
-            </section>
-            <section className="navbar-section">
-              <a href="#" className="btn btn-link" onClick={this.logout}>LOGOUT</a>
-            </section>
+          <div>
+            <div className="navbar">
+              <section className="navbar-section">
+                <Link to="/dashboard">DASHBOARD</Link>
+              </section>
+              <section className="navbar-center">
+              </section>
+              <section className="navbar-section">
+                <a onClick={this.logout} className="c-hand">LOGOUT </a>
+              </section>
+            </div>
+            <hr />
           </div>
         }
 
