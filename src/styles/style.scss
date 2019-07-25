@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
+
+$primary-color: #F1C40F;
+$dark-color: #34495E;
+
+@import "node_modules/spectre.css/src/spectre";
+
+body {
+  background-color: $dark-color;
+  font-family: 'Quicksand', sans-serif;
+}
