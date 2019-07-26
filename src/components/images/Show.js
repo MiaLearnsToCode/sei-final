@@ -54,6 +54,12 @@ class Show extends React.Component {
             <div className="columns">
               <div className="column col-6">
                 <h2>Filter stitches through colors</h2>
+                {
+                  this.state.image.colors.map(color => {
+
+                    return <span className="chip" key={color.id} style={{ backgroundColor: color.color}}>{color.color}</span>
+                  })
+                }
               </div>
               <div className="column col-6">
                 <div className='pixels-grid'>
