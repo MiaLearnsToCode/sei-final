@@ -7,7 +7,6 @@ def create_pixels(image):
     generated_pixels = []
 
     for i in list_sequence_obj:
-        color = str(i)
-        generated_pixels.append(color)
+        generated_pixels.append(i)
 
     return generated_pixels

@@ -95,8 +95,6 @@ def note_delete(**kwargs):
 @secure_route
 def generate_pixels(image_id):
     image_created = ImageModel.query.get(image_id)
-    print(image_created.user)
-    print(g.current_user)
     if not image_created:
         return jsonify({'message':'Image not found'}), 404
     if image_created.user != g.current_user:
@@ -112,7 +110,7 @@ def generate_pixels(image_id):
     generated_pixels = create_pixels(image)
 
     for pixel in generated_pixels:
-        pixel, errors = pixel_schema.load({'color':pixel, 'ticked': False})
+        pixel, errors = pixel_schema.load({'color':rgb_to_hex(pixel), 'ticked': False})
         if errors:
             return jsonify(errors), 422
         pixel.image = image_created
@@ -163,7 +161,7 @@ def generate_colors(image_id):
     stitches_count = [color_tuple[0] for color_tuple in colors_list]
 
     # length (in mm) of yarn needed for each color
-    color_length = [color_tuple[0]*2.5 for color_tuple in colors_list]
+    color_length = [color_tuple[0]*0.3 for color_tuple in colors_list]
 
     # list of the rgb colors needed for the project
     colors_list = [str(rgb_to_hex(color_tuple[1])) for color_tuple in colors_list]
