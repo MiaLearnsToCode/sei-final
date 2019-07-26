@@ -78,7 +78,7 @@ def note_create(image_id):
     note.image = image
     note.user = g.current_user
     note.save()
-    return note_schema.jsonify(note), 202
+    return image_schema.jsonify(image), 202
 
 @api.route('/images/<int:image_id>/notes/<int:note_id>', methods=['DELETE'])
 @secure_route

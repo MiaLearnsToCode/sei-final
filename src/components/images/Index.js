@@ -29,10 +29,9 @@ class Index extends React.Component {
   }
 
   render() {
-    console.log(this.state)
     return(
       <div className="container">
-        <h1>My Projects</h1>
+        <h1>Your Projects</h1>
         {
           !this.state.images &&
           <div className="empty-state">

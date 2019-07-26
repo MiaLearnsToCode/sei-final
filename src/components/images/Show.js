@@ -5,7 +5,10 @@ import Auth from '../../lib/Auth'
 class Show extends React.Component {
   constructor() {
     super()
-    this.state = { image: {}, filterColor: null }
+    this.state = { image: {}, filterColor: null, text: null }
+    this.filterReset = this.filterReset.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   generatePixels() {
@@ -24,7 +27,7 @@ class Show extends React.Component {
       .catch(err => console.log(err))
   }
 
-  componentDidMount() {
+  getImage() {
     axios.get(`/api/images/${this.props.match.params.id}`, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
@@ -38,6 +41,10 @@ class Show extends React.Component {
         }
       })
       .catch(err => console.log(err))
+  }
+
+  componentDidMount() {
+    this.getImage()
   }
 
   sortPixels() {
@@ -55,7 +62,36 @@ class Show extends React.Component {
     this.setState({ filterColor: hex })
   }
 
+  filterReset() {
+    this.setState({ filterColor: ''})
+  }
+
+  completed(pixel) {
+    const data = {'ticked': true}
+    axios.put(`/api/images/${this.props.match.params.id}/pixels/${pixel.id}`, data, {
+      headers: { Authorization: `Bearer ${Auth.getToken()}` }
+    })
+      .then(() => this.getImage())
+      .catch(err => console.log(err))
+  }
+
+  handleChange(e) {
+    this.setState({ text: e.target.value })
+  }
+
+  handleSubmit(e) {
+    e.preventDefault()
+    const data = { text: this.state.text }
+    axios.post(`/api/images/${this.props.match.params.id}/notes`, data, {
+      headers: { Authorization: `Bearer ${Auth.getToken()}` }
+    })
+      .then(() => this.getImage())
+      .then(() => this.setState({ text: ''}))
+      .catch(err => console.log(err))
+  }
+
   render() {
+    console.log(this.state.image)
     if (!this.state.image.title) return null
     return(
       <div className="container">
@@ -77,7 +113,7 @@ class Show extends React.Component {
                     })
                   }
                 </div>
-                <button className="btn">Reset filter</button>
+                <button className="btn" onClick={this.filterReset}>Reset filter</button>
               </div>
               <div className="column col-6">
                 <div className='pixels-grid'>
@@ -88,15 +124,15 @@ class Show extends React.Component {
                       const px = `${h}px`
                       return <div
                         key={pixel.id}
-                        id={pixel.id}
+                        className = "pixel c-hand"
                         style={
                           {
-                            backgroundColor: this.state.filterColor === pixel.color || !this.state.filterColor  ? pixel.color : '#34495E',
+                            backgroundColor: this.state.filterColor === pixel.color && !pixel.ticked || !this.state.filterColor && !pixel.ticked ? pixel.color : '#34495E',
                             height: px,
-                            width: px,
-                            border: '1px solid #212121'
+                            width: px
                           }
                         }
+                        onClick={() => this.completed(pixel)}
                       >
                       </div>
                     })
@@ -107,14 +143,40 @@ class Show extends React.Component {
         }
         <div>
           <h2> For a {Math.sqrt(this.state.image.pixels.length) * 0.2}x{Math.sqrt(this.state.image.pixels.length) * 0.2}cm design you will need: </h2>
+          <div className='columns light-back'>
+            {
+              this.uniqueColors(this.state.image.colors, 'color').map(color => {
+                return <div className='col-4' key={color.id}>
+                  <span className="chip" style={{ backgroundColor: color.color}}>{color.color}</span>
+                  <p>{color.length}cm for {color.stitches} stitches</p>
+                </div>
+              })
+            }
+          </div>
+        </div>
+        <div>
+          <h2>Notes</h2>
           {
-            this.uniqueColors(this.state.image.colors, 'color').map(color => {
-              return <div key={color.id}>
-                <span className="chip" style={{ backgroundColor: color.color}}>{color.color}</span>
-                <p>{color.length}cm for {color.stitches} stitches</p>
+            this.state.image.notes.map(note => {
+              return <div key={note.id} className="card light-back">
+                <div className="card-header">
+                  <div className="card-subtitle text-gray">{note.created_at}</div>
+                </div>
+                <div className="card-body">{note.text}</div>
               </div>
             })
           }
+          <form className="form-group" onSubmit={this.handleSubmit}>
+            <input
+              className="form-input"
+              type="text"
+              name="text"
+              onChange={this.handleChange}
+              value={this.state.text || ''}
+              placeholder="Make a note to yourself"
+            />
+            <button className="btn" type="submit">Add</button>
+          </form>
         </div>
       </div>
     )
