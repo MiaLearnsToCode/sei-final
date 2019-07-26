@@ -45,6 +45,14 @@ a:hover {
 .panel {
   margin: 10px;
   background-color: $asphalt;
-  border-width: 3px;
+  border: none;
   border-radius: 10px;
+}
+
+.pixels-grid {
+  width: 500px;
+  height: 500px;
+  display: flex;
+  flex-wrap: wrap;
+  flex:initial;
 }

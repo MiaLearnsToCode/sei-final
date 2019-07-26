@@ -6,7 +6,9 @@ import Panel from './Panel'
 class Index extends React.Component {
   constructor() {
     super()
-    this.state = {images: []}
+    this.state = {images: [], searchBox: ''}
+    this.handleChange = this.handleChange.bind(this)
+    this.filter = this.filter.bind(this)
   }
 
   componentDidMount() {
@@ -15,6 +17,15 @@ class Index extends React.Component {
     })
       .then(res => this.setState({ images: res.data }) )
       .catch(err => console.log(err))
+  }
+
+  handleChange(e) {
+    this.setState({searchBox: e.target.value})
+  }
+
+  filter() {
+    const regexp = new RegExp(this.state.searchBox, 'i')
+    return this.state.images.filter(project => regexp.test(project.title))
   }
 
   render() {
@@ -34,12 +45,17 @@ class Index extends React.Component {
         }
         {
           this.state.images[0] &&
-          <div className="projects-list columns">
-            {
-              this.state.images.map(image => {
-                return <Panel key={image.id} {...image}/>
-              })
-            }
+          <div>
+            <div className="input-group input-inline">
+              <input className="form-input" type="text" placeholder="Search your projects" onChange={this.handleChange} size='40'/>
+            </div>
+            <div className="projects-list columns">
+              {
+                this.filter().map(image => {
+                  return <Panel key={image.id} {...image}/>
+                })
+              }
+            </div>
           </div>
         }
 

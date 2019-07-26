@@ -95,6 +95,8 @@ def note_delete(**kwargs):
 @secure_route
 def generate_pixels(image_id):
     image_created = ImageModel.query.get(image_id)
+    print(image_created.user)
+    print(g.current_user)
     if not image_created:
         return jsonify({'message':'Image not found'}), 404
     if image_created.user != g.current_user:

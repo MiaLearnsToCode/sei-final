@@ -12,6 +12,7 @@ import Login from './components/auth/Login'
 import Register from './components/auth/Register'
 
 import Index from './components/images/Index'
+import Show from './components/images/Show'
 
 class App extends React.Component {
   render() {
@@ -20,6 +21,7 @@ class App extends React.Component {
         <div>
           <Navbar />
           <Switch>
+            <Route path='/projects/:id' component={Show}/>
             <Route path='/dashboard' component={Index}/>
             <Route path='/register' component={Register}/>
             <Route exact path='/' component={Login}/>
