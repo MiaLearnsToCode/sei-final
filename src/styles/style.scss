@@ -6,72 +6,16 @@ $asphalt: #34495E;
 
 @import "node_modules/spectre.css/src/spectre";
 
+a:hover {
+  text-decoration: none;
+}
+
 body {
   background-color: $dark-color;
   color: $primary-color;
   font-family: 'Quicksand', sans-serif;
 }
 
-header {
-  margin: 40px 80px;
-  img {
-    height: 60px;
-  }
-  hr {
-    height:3px;
-    border:none;
-    color:$asphalt;
-    background-color:$asphalt;
-  }
-}
-
-.form-input {
-  background: $asphalt;
-  color: $primary-color;
-}
-
-.container {
-  min-height: 65vh;
-  margin:0px 80px;
-  padding-right: 160px;
-}
-
-.intro-section {
-  margin: 150px 100px 0px 0px;
-}
-
-.dashboard-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  a {
-    font-size: 50px;
-    border: none;
-    padding: 5px;
-  }
-}
-
-.flex-form {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-  padding: 30px 0px;
-}
-
-.register-section {
-  padding: 20px;
-  border-radius: 10px;
-}
-
-.register-form {
-  padding: 0 30%;
-}
-
-.input-inline {
-  margin: 30px 0px;
-}
 .btn {
   background-color: $asphalt;
 }
@@ -81,53 +25,9 @@ header {
   color: $dark-color;
 }
 
-a:hover {
-  text-decoration: none;
-}
-
-.empty-state {
-  background-color: $asphalt;
-  text-align: center;
-}
-
 .chip {
   color: $dark-color;
   padding: 10px;
-}
-
-.project-submit {
-  padding: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  button {
-    padding: 0px 40px;
-  }
-}
-
-.panel {
-  margin: 10px;
-  background-color: $asphalt;
-  border: none;
-  border-radius: 10px;
-}
-
-.light-back {
-  background-color: $asphalt;
-}
-
-.pixels-column {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.filter-chip {
-  margin: 10px 5px;
-  padding: 15px;
-}
-
-.show-panel {
-  margin: 80px 0px;
 }
 
 .colors-panel {
@@ -148,12 +48,70 @@ a:hover {
   }
 }
 
-.pixels-grid {
-  width: 500px;
-  height: 500px;
+.container {
+  min-height: 65vh;
+  margin:0px 80px;
+  padding-right: 160px;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  a {
+    font-size: 50px;
+    border: none;
+    padding: 5px;
+  }
+}
+
+.empty-state {
+  background-color: $asphalt;
+  text-align: center;
+}
+
+.filter-chip {
+  margin: 10px 5px;
+  padding: 15px;
+}
+
+.flex-form {
   display: flex;
   flex-wrap: wrap;
-  flex:initial;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 30px 0px;
+}
+
+.form-input {
+  background: $asphalt;
+  color: $primary-color;
+}
+
+header {
+  margin: 40px 80px;
+  img {
+    height: 60px;
+  }
+  hr {
+    height:3px;
+    border:none;
+    color:$asphalt;
+    background-color:$asphalt;
+  }
+}
+
+.input-inline {
+  margin: 30px 0px;
+}
+
+.light-back {
+  background-color: $asphalt;
+}
+
+.intro-section {
+  margin: 150px 100px 0px 0px;
 }
 
 .note-card {
@@ -171,9 +129,57 @@ a:hover {
   }
 }
 
+.panel {
+  margin: 10px;
+  background-color: $asphalt;
+  border: none;
+  border-radius: 10px;
+}
+
+.pixels-column {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.pixels-grid {
+  width: 500px;
+  height: 500px;
+  display: flex;
+  flex-wrap: wrap;
+  flex:initial;
+}
+
+.project-submit {
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  button {
+    padding: 0px 40px;
+  }
+}
+
+.register-form {
+  padding: 0 30%;
+}
+
+.register-section {
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.show-panel {
+  margin: 80px 0px;
+}
+
+
+
+
+
+
+
 .note-form {
   display: flex;
-
 }
 
 .pixel {

@@ -61,14 +61,6 @@ class Show extends React.Component {
     return unique
   }
 
-  filterColors(hex) {
-    this.setState({ filterColor: hex })
-  }
-
-  filterReset() {
-    this.setState({ filterColor: ''})
-  }
-
   completed(pixel) {
     const data = {'ticked': true}
     axios.put(`/api/images/${this.props.match.params.id}/pixels/${pixel.id}`, data, {
@@ -76,6 +68,14 @@ class Show extends React.Component {
     })
       .then(() => this.getImage())
       .catch(() => this.props.history.push('/error'))
+  }
+
+  filterColors(hex) {
+    this.setState({ filterColor: hex })
+  }
+
+  filterReset() {
+    this.setState({ filterColor: ''})
   }
 
   handleChange(e) {
@@ -101,8 +101,9 @@ class Show extends React.Component {
       .catch(() => this.props.history.push('/error'))
   }
 
-  handleDeleteNote(e) {
-    axios.delete(`/api/images/${this.props.match.params.id}/notes/${e.target.value}`, {
+  handleDeleteNote(id) {
+    console.log(id)
+    axios.delete(`/api/images/${this.props.match.params.id}/notes/${id}`, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then(() => this.getImage())
@@ -124,7 +125,9 @@ class Show extends React.Component {
             <div className="columns">
               <div className="column col-6">
                 <h2>Filter stitches</h2>
-                <p>Use these labels to highlight the stitches of the color you are working with</p>
+                <p>Use these labels to highlight the stitches of the color you are working with.</p>
+                <p>Remember to click away stitches as you embroid them to keep track of your progress.</p>
+                <br />
                 <div className="columns">
                   {
                     this.uniqueColors(this.state.image.colors, 'color').map(color => {
@@ -185,10 +188,11 @@ class Show extends React.Component {
               <div>
                 {
                   this.state.image.notes.map(note => {
+                    console.log(note.id)
                     return <div key={note.id} className="note-card card light-back">
                       <div className="card-header">
                         <p className="card-subtitle text-gray">{note.created_at}</p>
-                        <button value={note.id} className="btn" onClick={this.handleDeleteNote}> <TiDelete /> </button>
+                        <button className="btn" onClick={() => this.handleDeleteNote(note.id)}> <TiDelete /> </button>
                       </div>
                       <div className="card-body">{note.text}</div>
                     </div>

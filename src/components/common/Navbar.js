@@ -50,12 +50,12 @@ class Navbar extends React.Component{
           <div className="navbar-loggedin">
             <div className="navbar">
               <section className="navbar-section">
-                <Link to="/dashboard">DASHBOARD</Link>
+                <Link to="/dashboard"><h5>DASHBOARD</h5></Link>
               </section>
               <section className="navbar-center">
               </section>
               <section className="navbar-section">
-                <a onClick={this.logout} className="c-hand">LOGOUT </a>
+                <a onClick={this.logout} className="c-hand"><h5>LOGOUT</h5></a>
               </section>
             </div>
             <hr />

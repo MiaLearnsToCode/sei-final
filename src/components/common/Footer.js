@@ -4,7 +4,7 @@ const Footer = () => {
   return(
     <header className="navbar">
       <section className="navbar-section footer-section">
-        <p>Made by Mia</p>
+        <h5>YARN • Made by Mia</h5>
       </section>
       <section className="navbar-center">
       </section>
