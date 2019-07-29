@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import Auth from '../../lib/Auth'
 import Panel from './Panel'
+import { Link } from 'react-router-dom'
 
 class Index extends React.Component {
   constructor() {
@@ -30,25 +31,26 @@ class Index extends React.Component {
 
   render() {
     return(
-      <div className="container">
+      <div className='container'>
         <h1>Your Projects</h1>
+        <Link to='/projects/new' className='btn btn-primary btn-lg'> ➕ </Link>
         {
           !this.state.images &&
-          <div className="empty-state">
-            <p className="title h5">Nothing to see here</p>
-            <p className="subtitle">Click the button to start a new project:</p>
+          <div className='empty-state'>
+            <p className='title h5'>Nothing to see here</p>
+            <p className='subtitle'>Click the button to start a new project:</p>
             <div>
-              <button className="btn">New Project</button>
+              <button className='btn'>New Project</button>
             </div>
           </div>
         }
         {
           this.state.images[0] &&
           <div>
-            <div className="input-group input-inline">
-              <input className="form-input" type="text" placeholder="Search your projects" onChange={this.handleChange} size='40'/>
+            <div className='input-group input-inline'>
+              <input className='form-input' type='text' placeholder='Search your projects' onChange={this.handleChange} size='40'/>
             </div>
-            <div className="projects-list columns">
+            <div className='projects-list columns'>
               {
                 this.filter().map(image => {
                   return <Panel key={image.id} {...image}/>

@@ -27,9 +27,13 @@ nav {
   color: $dark-color;
 }
 
+.btn-selected {
+  background-color: $primary-color;
+  color: $dark-color;
+}
+
 a:hover {
   text-decoration: none;
-
 }
 
 .empty-state {

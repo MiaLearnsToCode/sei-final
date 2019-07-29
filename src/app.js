@@ -13,6 +13,7 @@ import Register from './components/auth/Register'
 
 import Index from './components/images/Index'
 import Show from './components/images/Show'
+import New from './components/images/New'
 
 class App extends React.Component {
   render() {
@@ -21,6 +22,7 @@ class App extends React.Component {
         <div>
           <Navbar />
           <Switch>
+            <Route path='/projects/new' component={New}/>
             <Route path='/projects/:id' component={Show}/>
             <Route path='/dashboard' component={Index}/>
             <Route path='/register' component={Register}/>

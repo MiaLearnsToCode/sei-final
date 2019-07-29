@@ -8,10 +8,3 @@ difficulty_schema = DifficultySchema()
 def index():
     difficulties = Difficulty.query.all()
     return difficulty_schema.jsonify(difficulties, many=True), 200
-
-@api.route('/difficulties/<int:difficulty_id>', methods=['GET'])
-def show(difficulty_id):
-    difficulty = Difficulty.query.get(difficulty_id)
-    if not difficulty:
-        return jsonify({'message':'Difficulty not found'}), 404
-    return difficulty_schema.jsonify(difficulty), 200

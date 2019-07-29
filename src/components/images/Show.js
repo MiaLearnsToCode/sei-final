@@ -9,6 +9,8 @@ class Show extends React.Component {
     this.filterReset = this.filterReset.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleDelete = this.handleDelete.bind(this)
+    this.handleDeleteNote = this.handleDeleteNote.bind(this)
   }
 
   generatePixels() {
@@ -90,6 +92,23 @@ class Show extends React.Component {
       .catch(err => console.log(err))
   }
 
+  handleDelete() {
+    axios.delete(`/api/images/${this.props.match.params.id}`, {
+      headers: { Authorization: `Bearer ${Auth.getToken()}` }
+    })
+      .then(() => this.props.history.push('/dashboard'))
+      .catch(err => console.log(err))
+  }
+
+  handleDeleteNote(e) {
+    axios.delete(`/api/images/${this.props.match.params.id}/notes/${e.target.value}`, {
+      headers: { Authorization: `Bearer ${Auth.getToken()}` }
+    })
+      .then(() => this.getImage())
+      .catch(err => console.log(err))
+  }
+
+
   render() {
     console.log(this.state.image)
     if (!this.state.image.title) return null
@@ -113,7 +132,7 @@ class Show extends React.Component {
                     })
                   }
                 </div>
-                <button className="btn" onClick={this.filterReset}>Reset filter</button>
+                <button className="btn" onClick={this.filterReset}>Reset Filter</button>
               </div>
               <div className="column col-6">
                 <div className='pixels-grid'>
@@ -142,13 +161,13 @@ class Show extends React.Component {
             </div>
         }
         <div>
-          <h2> For a {Math.sqrt(this.state.image.pixels.length) * 0.2}x{Math.sqrt(this.state.image.pixels.length) * 0.2}cm design you will need: </h2>
+          <h2> For a {Math.sqrt(this.state.image.pixels.length) * 2}x{Math.sqrt(this.state.image.pixels.length) * 2}mm design you will need: </h2>
           <div className='columns light-back'>
             {
               this.uniqueColors(this.state.image.colors, 'color').map(color => {
                 return <div className='col-4' key={color.id}>
                   <span className="chip" style={{ backgroundColor: color.color}}>{color.color}</span>
-                  <p>{color.length}cm for {color.stitches} stitches</p>
+                  <p>{color.length}mm for {color.stitches} stitches</p>
                 </div>
               })
             }
@@ -161,6 +180,7 @@ class Show extends React.Component {
               return <div key={note.id} className="card light-back">
                 <div className="card-header">
                   <div className="card-subtitle text-gray">{note.created_at}</div>
+                  <button value={note.id} className="btn" onClick={this.handleDeleteNote}>✖️ </button>
                 </div>
                 <div className="card-body">{note.text}</div>
               </div>
@@ -177,6 +197,9 @@ class Show extends React.Component {
             />
             <button className="btn" type="submit">Add</button>
           </form>
+        </div>
+        <div>
+          <button className="btn primary-btn" onClick={this.handleDelete}>Delete Project</button>
         </div>
       </div>
     )

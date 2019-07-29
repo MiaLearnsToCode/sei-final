@@ -47,6 +47,7 @@ def create():
     # set difficulty using the id provided
     difficulty = data['difficulty_id']
     image.difficulty = Difficulty.query.get(difficulty)
+    image.user = g.current_user
     image.save()
     return image_schema.jsonify(image), 201
 
@@ -161,7 +162,7 @@ def generate_colors(image_id):
     stitches_count = [color_tuple[0] for color_tuple in colors_list]
 
     # length (in mm) of yarn needed for each color
-    color_length = [color_tuple[0]*0.3 for color_tuple in colors_list]
+    color_length = [color_tuple[0]*2.5 for color_tuple in colors_list]
 
     # list of the rgb colors needed for the project
     colors_list = [str(rgb_to_hex(color_tuple[1])) for color_tuple in colors_list]

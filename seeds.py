@@ -35,11 +35,11 @@ with app.app_context():
 
 
     teddy = ImageModel(title='teddy', url='https://pixy.org/src/81/thumbs350/811052.jpg', difficulty=hard, user=mia)
-    teddy_one = ImageModel(title='teddy_one', url='https://pixy.org/src/81/thumbs350/811052.jpg', difficulty=easy, user=mia)
+    landscape = ImageModel(title='landscape', url='https://static1.squarespace.com/static/52e57753e4b0f20972c633ab/532b8a93e4b0ccd5fa5463af/5804d81cf5e2319f13781dc2/1476712482113/Brough_-Clearing%2CHelene%27s+view-.jpeg', difficulty=easy, user=mia)
     teddy_two = ImageModel(title='teddy_two', url='https://pixy.org/src/81/thumbs350/811052.jpg', difficulty=easy, user=sim)
 
     note = Note(text='finished the first row', image=teddy, user=mia)
-    note_one = Note(text='Ran out of yarn', image=teddy_one, user=mia)
+    note_one = Note(text='Ran out of yarn', image=landscape, user=mia)
 
     db.session.add(mia)
     db.session.add(sim)
@@ -47,7 +47,7 @@ with app.app_context():
     db.session.add(medium)
     db.session.add(hard)
     db.session.add(teddy)
-    db.session.add(teddy_one)
+    db.session.add(landscape)
     db.session.add(teddy_two)
     db.session.add(note)
     db.session.add(note_one)
