@@ -32,8 +32,10 @@ class Index extends React.Component {
   render() {
     return(
       <div className='container'>
-        <h1>Your Projects</h1>
-        <Link to='/projects/new' className='btn btn-primary btn-lg'> ➕ </Link>
+        <div className='dashboard-header'>
+          <h1>Your Projects</h1>
+          <Link to='/projects/new' className='btn btn-primary btn-lg'> ➕ </Link>
+        </div>
         {
           !this.state.images[0] &&
           <div className='empty-state'>

@@ -42,7 +42,7 @@ class New extends React.Component {
   render() {
     if (!this.state.data && !this.state.difficulties[0]) return null
     return(
-      <div className="columns">
+      <div className="columns container">
         <div className="col-7">
           {
             !this.state.data.url &&
@@ -70,6 +70,7 @@ class New extends React.Component {
               onChange={this.handleChange}
             />
             {this.state.errors.title && <small className="is-error">{this.state.errors.title}</small>}
+            <br />
             <label className="form-label">Url</label>
             <input
               className="form-input"
@@ -78,8 +79,10 @@ class New extends React.Component {
               onChange={this.handleChange}
             />
             {this.state.errors.url && <small className="is-error">{this.state.errors.url}</small>}
+            <br />
             <label className="form-label">Difficulty Level</label>
-            {!this.state.data.difficulty_id && <small className="is-error">Please pick a difficulty:</small>}
+            {!this.state.data.difficulty_id && <p className="is-error label">Please pick a difficulty:</p>}
+            <br />
             {this.state.data.difficulty_id && <p className="is-error"> </p>}
             <div className="btn-group btn-group-block">
               {
@@ -95,7 +98,9 @@ class New extends React.Component {
               }
 
             </div>
-            <div>
+            <br />
+            <hr />
+            <div className="project-submit">
               <button className="btn input-group-btn"> Create </button>
             </div>
           </form>

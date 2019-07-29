@@ -24,7 +24,9 @@ const Panel = ({title, url, pixels, difficulty, id}) => {
             <div className="chip">{difficulty.level}</div>
           </div>
         </div>
+        <br />
         <hr />
+        <br />
         <div className="tile tile-centered">
           <div className="tile-content">
             <div className="title text-bold">You have completed:</div>

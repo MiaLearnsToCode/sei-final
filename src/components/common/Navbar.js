@@ -47,7 +47,7 @@ class Navbar extends React.Component{
         </nav>
         {
           Auth.isAuthenticated() &&
-          <div>
+          <div className="navbar-loggedin">
             <div className="navbar">
               <section className="navbar-section">
                 <Link to="/dashboard">DASHBOARD</Link>

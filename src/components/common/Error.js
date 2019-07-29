@@ -6,6 +6,7 @@ const Error = () => {
     <div className="container">
       <section>
         <h1>Oops, something went wrong</h1>
+        <br />
         <Link to='/' className='btn'>Go back to the homepage</Link >
       </section>
     </div>

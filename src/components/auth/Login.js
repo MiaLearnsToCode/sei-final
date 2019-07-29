@@ -32,13 +32,14 @@ class Login extends React.Component {
   render() {
     return (
       <div className="container columns">
-        <div className="column col-6">
+        <div className="column intro-section col-6">
           <h1>Yarn: Embroidery Made Simple</h1>
+          <br />
           <p>Turn any image into an embroidery friendly design & keep track of your progress.</p>
         </div>
         <div className="form-group column col-4" >
-          <form onSubmit={this.handleSubmit}>
-            <h2>Sign In</h2>
+          <form onSubmit={this.handleSubmit} className="flex-form">
+            <h2 className="text-center">Sign In</h2>
             {this.state.error &&
               <div>
                 <small className="is-erros">{this.state.error}</small>
@@ -62,7 +63,8 @@ class Login extends React.Component {
             />
             <br />
             <button className="btn input-group-btn"> Sign in </button>
-            <div className="light-back">
+            <br />
+            <div className="light-back text-center register-section">
               <p>New here?</p>
               <Link to="/register" className="c-hand">Register a new account</Link>
             </div>
