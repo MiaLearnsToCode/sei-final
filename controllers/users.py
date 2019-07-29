@@ -9,7 +9,7 @@ def register():
     data = request.get_json()
     user, errors = user_schema.load(data)
     if errors:
-        return jsonify(errors)
+        return jsonify(errors), 422
     user.save()
     return jsonify({'message':'Registration successful'}), 201
 

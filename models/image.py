@@ -11,9 +11,9 @@ class ImageModel(db.Model, BaseModel):
 
     title = db.Column(db.String(50), nullable=False)
     url = db.Column(db.String(300), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     user = db.relationship('User', backref='created_images')
-    difficulty_id = db.Column(db.Integer, db.ForeignKey('difficulties.id'))
+    difficulty_id = db.Column(db.Integer, db.ForeignKey('difficulties.id'), nullable=False)
     difficulty = db.relationship('Difficulty', backref='created_images')
 
 class ImageSchema(ma.ModelSchema, BaseSchema):

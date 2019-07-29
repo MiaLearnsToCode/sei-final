@@ -43,7 +43,6 @@ def create():
     image, errors = image_schema.load(data)
     if errors:
         return jsonify(errors), 422
-
     # set difficulty using the id provided
     difficulty = data['difficulty_id']
     image.difficulty = Difficulty.query.get(difficulty)

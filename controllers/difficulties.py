@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint
 from models.difficulty import Difficulty, DifficultySchema
 
 api = Blueprint('difficulty', __name__)

@@ -18,7 +18,7 @@ class Show extends React.Component {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then(res => this.setState({ image: res.data }))
-      .catch(err => console.log(err))
+      .catch(() => this.props.history.push('/error'))
   }
 
   generateColors() {
@@ -26,7 +26,7 @@ class Show extends React.Component {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then(res => this.setState({ image: res.data }))
-      .catch(err => console.log(err))
+      .catch(() => this.props.history.push('/error'))
   }
 
   getImage() {
@@ -42,7 +42,7 @@ class Show extends React.Component {
           this.generateColors()
         }
       })
-      .catch(err => console.log(err))
+      .catch(() => this.props.history.push('/error'))
   }
 
   componentDidMount() {
@@ -74,7 +74,7 @@ class Show extends React.Component {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then(() => this.getImage())
-      .catch(err => console.log(err))
+      .catch(() => this.props.history.push('/error'))
   }
 
   handleChange(e) {
@@ -89,7 +89,7 @@ class Show extends React.Component {
     })
       .then(() => this.getImage())
       .then(() => this.setState({ text: ''}))
-      .catch(err => console.log(err))
+      .catch(() => this.props.history.push('/error'))
   }
 
   handleDelete() {
@@ -97,7 +97,7 @@ class Show extends React.Component {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then(() => this.props.history.push('/dashboard'))
-      .catch(err => console.log(err))
+      .catch(() => this.props.history.push('/error'))
   }
 
   handleDeleteNote(e) {
@@ -105,17 +105,21 @@ class Show extends React.Component {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then(() => this.getImage())
-      .catch(err => console.log(err))
+      .catch(() => this.props.history.push('/error'))
   }
 
 
   render() {
-    console.log(this.state.image)
     if (!this.state.image.title) return null
     return(
       <div className="container">
         {
-          this.state.image.pixels[0] &&
+          !this.state.image.pixels[99] &&
+          <img className="spinner" src="https://media3.giphy.com/media/kHHVb1kBX86vMNHXpg/giphy.gif?cid=790b76115d3edf3f616c5a6667c0645a&rid=giphy.gif" alt="Loading"/>
+        }
+        {
+          this.state.image.pixels[99] &&
+          <div>
             <div className="columns">
               <div className="column col-6">
                 <h2>Filter stitches</h2>
@@ -159,48 +163,49 @@ class Show extends React.Component {
                 </div>
               </div>
             </div>
-        }
-        <div>
-          <h2> For a {Math.sqrt(this.state.image.pixels.length) * 2}x{Math.sqrt(this.state.image.pixels.length) * 2}mm design you will need: </h2>
-          <div className='columns light-back'>
-            {
-              this.uniqueColors(this.state.image.colors, 'color').map(color => {
-                return <div className='col-4' key={color.id}>
-                  <span className="chip" style={{ backgroundColor: color.color}}>{color.color}</span>
-                  <p>{color.length}mm for {color.stitches} stitches</p>
-                </div>
-              })
-            }
-          </div>
-        </div>
-        <div>
-          <h2>Notes</h2>
-          {
-            this.state.image.notes.map(note => {
-              return <div key={note.id} className="card light-back">
-                <div className="card-header">
-                  <div className="card-subtitle text-gray">{note.created_at}</div>
-                  <button value={note.id} className="btn" onClick={this.handleDeleteNote}>✖️ </button>
-                </div>
-                <div className="card-body">{note.text}</div>
+            <div>
+              <h2> For a {Math.sqrt(this.state.image.pixels.length) * 2}x{Math.sqrt(this.state.image.pixels.length) * 2}mm design you will need: </h2>
+              <div className='columns light-back'>
+                {
+                  this.uniqueColors(this.state.image.colors, 'color').map(color => {
+                    return <div className='col-4' key={color.id}>
+                      <span className="chip" style={{ backgroundColor: color.color}}>{color.color}</span>
+                      <p>{color.length}mm for {color.stitches} stitches</p>
+                    </div>
+                  })
+                }
               </div>
-            })
-          }
-          <form className="form-group" onSubmit={this.handleSubmit}>
-            <input
-              className="form-input"
-              type="text"
-              name="text"
-              onChange={this.handleChange}
-              value={this.state.text || ''}
-              placeholder="Make a note to yourself"
-            />
-            <button className="btn" type="submit">Add</button>
-          </form>
-        </div>
-        <div>
-          <button className="btn primary-btn" onClick={this.handleDelete}>Delete Project</button>
-        </div>
+            </div>
+            <div>
+              <h2>Notes</h2>
+              {
+                this.state.image.notes.map(note => {
+                  return <div key={note.id} className="card light-back">
+                    <div className="card-header">
+                      <div className="card-subtitle text-gray">{note.created_at}</div>
+                      <button value={note.id} className="btn" onClick={this.handleDeleteNote}>✖️ </button>
+                    </div>
+                    <div className="card-body">{note.text}</div>
+                  </div>
+                })
+              }
+              <form className="form-group" onSubmit={this.handleSubmit}>
+                <input
+                  className="form-input"
+                  type="text"
+                  name="text"
+                  onChange={this.handleChange}
+                  value={this.state.text || ''}
+                  placeholder="Make a note to yourself"
+                />
+                <button className="btn" type="submit">Add</button>
+              </form>
+            </div>
+            <div>
+              <button className="btn primary-btn" onClick={this.handleDelete}>Delete Project</button>
+            </div>
+          </div>
+        }
       </div>
     )
   }

@@ -6,7 +6,6 @@ def create_colors(image):
     colors_list = image.getcolors()
     colors_list = sorted(colors_list, key=lambda tup: (tup[0], tup[1]))
     colors_list = colors_list[::-1]
-    print(colors_list)
     def duplicate(colors):
         unique = []
         for color in colors:
@@ -15,5 +14,4 @@ def create_colors(image):
         return unique
 
     colors_list = duplicate(colors_list)
-    print(colors_list)
     return colors_list

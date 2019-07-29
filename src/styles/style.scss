@@ -12,9 +12,13 @@ body {
   font-family: 'Quicksand', sans-serif;
 }
 
-nav {
+header {
+  padding: 50px;
   img {
     height: 60px;
+  }
+  hr {
+    height:3px; border:none; color:$asphalt; background-color:$asphalt;
   }
 }
 
@@ -22,12 +26,7 @@ nav {
   background-color: $asphalt;
 }
 
-.btn:hover {
-  background-color: $primary-color;
-  color: $dark-color;
-}
-
-.btn-selected {
+.btn:hover, .btn-selected, .btn:active, .btn:visited {
   background-color: $primary-color;
   color: $dark-color;
 }
@@ -71,4 +70,29 @@ a:hover {
 
 .pixel:hover {
   border: 3px solid #212121;
+}
+
+.avatar {
+  img {
+    object-fit: cover;
+  }
+}
+
+.image-preview {
+  height: 500px;
+  width: 500px;
+  img {
+    object-fit: cover;
+    height: 500px;
+    width: 500px;
+  }
+}
+
+.spinner {
+  height: 300px;
+  margin-left: 40%
+}
+
+.github-logo {
+  height:50px;
 }

@@ -17,7 +17,7 @@ class Index extends React.Component {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then(res => this.setState({ images: res.data }) )
-      .catch(err => console.log(err))
+      .catch(() => this.props.history.push('/error'))
   }
 
   handleChange(e) {
@@ -35,12 +35,12 @@ class Index extends React.Component {
         <h1>Your Projects</h1>
         <Link to='/projects/new' className='btn btn-primary btn-lg'> ➕ </Link>
         {
-          !this.state.images &&
+          !this.state.images[0] &&
           <div className='empty-state'>
             <p className='title h5'>Nothing to see here</p>
             <p className='subtitle'>Click the button to start a new project:</p>
             <div>
-              <button className='btn'>New Project</button>
+              <Link to='/projects/new' className='btn'>New Project</Link>
             </div>
           </div>
         }

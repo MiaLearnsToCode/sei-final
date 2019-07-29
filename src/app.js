@@ -7,6 +7,7 @@ import './styles/style.scss'
 
 import Navbar from './components/common/Navbar'
 import Footer from './components/common/Footer'
+import Error from './components/common/Error'
 
 import Login from './components/auth/Login'
 import Register from './components/auth/Register'
@@ -26,6 +27,7 @@ class App extends React.Component {
             <Route path='/projects/:id' component={Show}/>
             <Route path='/dashboard' component={Index}/>
             <Route path='/register' component={Register}/>
+            <Route path='/error' component={Error}/>
             <Route exact path='/' component={Login}/>
           </Switch>
           <Footer />

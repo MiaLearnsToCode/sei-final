@@ -7,7 +7,7 @@ class Login extends React.Component {
   constructor() {
     super()
 
-    this.state = { data: {}, errors: ''}
+    this.state = { data: {}, error: ''}
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
@@ -39,6 +39,11 @@ class Login extends React.Component {
         <div className="form-group column col-4" >
           <form onSubmit={this.handleSubmit}>
             <h2>Sign In</h2>
+            {this.state.error &&
+              <div>
+                <small className="is-erros">{this.state.error}</small>
+              </div>
+            }
             <label className="form-label">Email</label>
             <input
               className="form-input"
@@ -55,9 +60,12 @@ class Login extends React.Component {
               placeholder="Password"
               onChange={this.handleChange}
             />
+            <br />
             <button className="btn input-group-btn"> Sign in </button>
-            <p>New here?</p>
-            <Link to="/register" className="c-hand">Register here</Link>
+            <div className="light-back">
+              <p>New here?</p>
+              <Link to="/register" className="c-hand">Register a new account</Link>
+            </div>
           </form>
         </div>
       </div>

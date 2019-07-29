@@ -6,7 +6,7 @@ class New extends React.Component {
   constructor() {
     super()
 
-    this.state = {data: {}, erros: {}, difficulties: []}
+    this.state = {data: {}, errors: {}, difficulties: []}
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
@@ -16,7 +16,7 @@ class New extends React.Component {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then(res => this.setState({ difficulties: res.data}))
-      .catch(err => console.log(err))
+      .catch(() => this.props.history.push('/error'))
   }
 
   componentDidMount() {
@@ -30,31 +30,29 @@ class New extends React.Component {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then(() => this.props.history.push('/dashboard'))
-      .catch(err => this.setState({ errors: err.response.data.errors }) )
+      .catch(err => this.setState({ errors: err.response.data}))
   }
 
   handleChange(e) {
     e.preventDefault()
-    console.log(typeof e.currentTarget.value)
     const data = {...this.state.data, [e.target.name]: e.target.value}
     this.setState({data, errors: {}})
   }
 
   render() {
-    console.log(this.state)
     if (!this.state.data && !this.state.difficulties[0]) return null
     return(
       <div className="columns">
         <div className="col-7">
           {
             !this.state.data.url &&
-            <div className="empty">
+            <div className="empty image-preview">
               <p className="empty-title h5">Image Preview</p>
             </div>
           }
           {
             this.state.data.url &&
-            <div className="empty">
+            <div className="image-preview">
               <img src={this.state.data.url}/>
             </div>
           }
@@ -71,6 +69,7 @@ class New extends React.Component {
               placeholder="Project title"
               onChange={this.handleChange}
             />
+            {this.state.errors.title && <small className="is-error">{this.state.errors.title}</small>}
             <label className="form-label">Url</label>
             <input
               className="form-input"
@@ -78,7 +77,10 @@ class New extends React.Component {
               placeholder="Image url (preferrably ending in .jpeg)"
               onChange={this.handleChange}
             />
+            {this.state.errors.url && <small className="is-error">{this.state.errors.url}</small>}
             <label className="form-label">Difficulty Level</label>
+            {!this.state.data.difficulty_id && <small className="is-error">Please pick a difficulty:</small>}
+            {this.state.data.difficulty_id && <p className="is-error"> </p>}
             <div className="btn-group btn-group-block">
               {
                 this.state.difficulties[0] &&
@@ -86,13 +88,16 @@ class New extends React.Component {
                   return <button key={difficulty.id}
                     name='difficulty_id'
                     value={difficulty.id}
-                    className={`btn ${this.state.data.difficulty === difficulty.id ? 'btn-selected' : ''}`}
+                    className={`btn ${this.state.data.difficulty_id == difficulty.id ? 'btn-selected' : ''}`}
                     onClick={this.handleChange}
                   >{difficulty.level}</button>
                 })
               }
+
             </div>
-            <button className="btn input-group-btn"> Create </button>
+            <div>
+              <button className="btn input-group-btn"> Create </button>
+            </div>
           </form>
         </div>
       </div>

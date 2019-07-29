@@ -4,12 +4,12 @@ const Footer = () => {
   return(
     <header className="navbar">
       <section className="navbar-section">
-        <a href="#" className="btn btn-link">Made by Mia</a>
+        <p>Made by Mia</p>
       </section>
       <section className="navbar-center">
       </section>
       <section className="navbar-section">
-        <a href="#" className="btn btn-link">GitHub</a>
+        <a href="https://github.com/MiaLearnsToCode/yarn"><img className="github-logo" src="https://www.omnilayer.org/images/github-iconOutline.svg" /></a>
       </section>
     </header>
   )
