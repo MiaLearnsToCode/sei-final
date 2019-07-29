@@ -4,6 +4,7 @@ from marshmallow import fields
 
 # Base model: applied to all other models to populate id and timestamps
 # The model includes the save and remove methods used in the controllers
+
 class BaseModel:
     id = db.Column(db.Integer, primary_key=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)

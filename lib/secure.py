@@ -4,6 +4,7 @@ import jwt
 from models.user import User
 from config.environment import secret
 
+# function checks if the user is authorized to be in route
 def secure_route(func):
     @wraps(func)
     def wrapper(*args, **kwargs):

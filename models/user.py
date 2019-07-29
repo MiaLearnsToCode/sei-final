@@ -6,6 +6,7 @@ from app import db, ma, bcrypt
 from config.environment import secret
 from .base import BaseModel, BaseSchema
 
+# user model includes all the information needed to register and sign in a user
 class User(db.Model, BaseModel):
 
     __tablename__ = 'users'
@@ -45,6 +46,7 @@ class UserSchema(ma.ModelSchema, BaseSchema):
 
     @validates_schema
     # pylint: disable=R0201
+    # check if the password confirmation field matches the password
     def check_passwords_match(self, data):
         if data.get('password') != data.get('password_confirmation'):
             raise ValidationError(

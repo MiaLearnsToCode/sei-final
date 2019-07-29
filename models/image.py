@@ -5,6 +5,7 @@ from .base import BaseModel, BaseSchema
 from .difficulty import Difficulty
 from .user import User
 
+# image model defines each project (has a relationship with the user who created it and the difficulty picked)
 class ImageModel(db.Model, BaseModel):
 
     __tablename__ = 'images'
@@ -27,6 +28,7 @@ class ImageSchema(ma.ModelSchema, BaseSchema):
     difficulty = fields.Nested('DifficultySchema', only=('id', 'level', 'pixelSize'))
     notes = fields.Nested('NoteSchema', many=True)
 
+# each image has an array of pixels, as the user ticks them on the front end the ticked boolean changes
 class Pixel(db.Model, BaseModel):
 
     __tablename__ = 'pixels'
@@ -41,7 +43,8 @@ class PixelSchema(ma.ModelSchema, BaseSchema):
     class Meta:
         model = Pixel
 
-
+# each image has an array of the most commonly found colors in it.
+# This also includes how many stiches are needed per color and the length of the thread needed
 class Color(db.Model, BaseModel):
 
     __tablename__ = 'colors'
@@ -57,7 +60,7 @@ class ColorSchema(ma.ModelSchema, BaseSchema):
     class Meta:
         model = Color
 
-
+# each image has an array of notes
 class Note(db.Model, BaseModel):
 
     __tablename__ = 'notes'

@@ -15,27 +15,7 @@ note_schema = NoteSchema()
 pixel_schema = PixelSchema()
 color_schema = ColorSchema()
 
-@api.route('/images', methods=['GET'])
-@secure_route
-def index():
-    images = ImageModel.query.all()
-    user_images = []
-    for image in images:
-        if image.user == g.current_user:
-            user_images.append(image)
-    return image_schema.jsonify(user_images, many=True), 200
-
-@api.route('/images/<int:image_id>', methods=['GET'])
-@secure_route
-def show(image_id):
-    image = ImageModel.query.get(image_id)
-    if not image:
-        return jsonify({'message':'Image not found'}), 404
-    if image.user != g.current_user:
-        return jsonify({'message':'Unauthorized'}), 401
-    return image_schema.jsonify(image), 200
-
-
+# -----New component-----
 @api.route('/images', methods=['POST'])
 @secure_route
 def create():
@@ -51,6 +31,30 @@ def create():
     return image_schema.jsonify(image), 201
 
 
+# -----Index component-----
+@api.route('/images', methods=['GET'])
+@secure_route
+def index():
+    images = ImageModel.query.all()
+    user_images = []
+    for image in images:
+        if image.user == g.current_user:
+            user_images.append(image)
+    return image_schema.jsonify(user_images, many=True), 200
+
+
+# -----Show component-----
+@api.route('/images/<int:image_id>', methods=['GET'])
+@secure_route
+def show(image_id):
+    image = ImageModel.query.get(image_id)
+    if not image:
+        return jsonify({'message':'Image not found'}), 404
+    if image.user != g.current_user:
+        return jsonify({'message':'Unauthorized'}), 401
+    return image_schema.jsonify(image), 200
+
+
 @api.route('/images/<int:image_id>', methods=['DELETE'])
 @secure_route
 def delete(image_id):
@@ -62,7 +66,7 @@ def delete(image_id):
     image.remove()
     return jsonify({'message':'Image delete'}), 204
 
-
+# Notes routes: create and delete
 @api.route('/images/<int:image_id>/notes', methods=['POST'])
 @secure_route
 def note_create(image_id):
@@ -80,6 +84,7 @@ def note_create(image_id):
     note.save()
     return image_schema.jsonify(image), 202
 
+
 @api.route('/images/<int:image_id>/notes/<int:note_id>', methods=['DELETE'])
 @secure_route
 def note_delete(**kwargs):
@@ -91,6 +96,8 @@ def note_delete(**kwargs):
     note.remove()
     return '', 204
 
+
+# Pixels routes: generate and edit
 @api.route('/images/<int:image_id>/pixels', methods=['POST'])
 @secure_route
 def generate_pixels(image_id):
@@ -133,6 +140,7 @@ def index_pixels(**kwargs):
         return jsonify({'message': 'Pixel not Found'}), 404
     data = request.get_json()
     errors = {}
+
     pixel, errors = pixel_schema.load(data, instance=pixel, partial=True)
     if errors:
         return jsonify(errors), 422
@@ -140,6 +148,7 @@ def index_pixels(**kwargs):
     return pixel_schema.jsonify(pixel), 202
 
 
+# Colors route: generate only
 @api.route('/images/<int:image_id>/colors', methods=['POST'])
 @secure_route
 def generate_colors(image_id):

@@ -4,6 +4,8 @@ from models.user import User, UserSchema
 api = Blueprint('users', __name__)
 user_schema = UserSchema()
 
+# Routes that allow a user to register and log in
+# -----Register component-----
 @api.route('/register', methods=['POST'])
 def register():
     data = request.get_json()
@@ -13,6 +15,7 @@ def register():
     user.save()
     return jsonify({'message':'Registration successful'}), 201
 
+# -----Login component-----
 @api.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
