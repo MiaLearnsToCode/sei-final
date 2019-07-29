@@ -3,6 +3,7 @@ import axios from 'axios'
 import Auth from '../../lib/Auth'
 import Panel from './Panel'
 import { Link } from 'react-router-dom'
+import { TiPlusOutline} from 'react-icons/ti'
 
 class Index extends React.Component {
   constructor() {
@@ -34,7 +35,7 @@ class Index extends React.Component {
       <div className='container'>
         <div className='dashboard-header'>
           <h1>Your Projects</h1>
-          <Link to='/projects/new' className='btn btn-primary btn-lg'> ➕ </Link>
+          <Link to='/projects/new'> <TiPlusOutline /> </Link>
         </div>
         {
           !this.state.images[0] &&

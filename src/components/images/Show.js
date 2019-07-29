@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import Auth from '../../lib/Auth'
+import { TiDelete } from 'react-icons/ti'
 
 class Show extends React.Component {
   constructor() {
@@ -128,7 +129,7 @@ class Show extends React.Component {
                   {
                     this.uniqueColors(this.state.image.colors, 'color').map(color => {
                       return <a
-                        className="chip col-3 c-hand"
+                        className="chip filter-chip col-3 c-hand"
                         key={color.id}
                         style={{ backgroundColor: color.color}}
                         onClick={() => this.filterColors(color.color)}
@@ -136,9 +137,10 @@ class Show extends React.Component {
                     })
                   }
                 </div>
+                <br />
                 <button className="btn" onClick={this.filterReset}>Reset Filter</button>
               </div>
-              <div className="column col-6">
+              <div className="column pixels-column col-6">
                 <div className='pixels-grid'>
                   {
                     this.sortPixels().map(pixel => {
@@ -163,45 +165,52 @@ class Show extends React.Component {
                 </div>
               </div>
             </div>
-            <div>
+            <div className="show-panel">
               <h2> For a {Math.sqrt(this.state.image.pixels.length) * 2}x{Math.sqrt(this.state.image.pixels.length) * 2}mm design you will need: </h2>
-              <div className='columns light-back'>
+              <br />
+              <div className='columns light-back colors-panel'>
                 {
                   this.uniqueColors(this.state.image.colors, 'color').map(color => {
                     return <div className='col-4' key={color.id}>
-                      <span className="chip" style={{ backgroundColor: color.color}}>{color.color}</span>
+                      <p className="chip" style={{ backgroundColor: color.color}}>{color.color}</p>
+                      <hr />
                       <p>{color.length}mm for {color.stitches} stitches</p>
                     </div>
                   })
                 }
               </div>
             </div>
-            <div>
+            <div className="show-panel">
               <h2>Notes</h2>
-              {
-                this.state.image.notes.map(note => {
-                  return <div key={note.id} className="card light-back">
-                    <div className="card-header">
-                      <div className="card-subtitle text-gray">{note.created_at}</div>
-                      <button value={note.id} className="btn" onClick={this.handleDeleteNote}>✖️ </button>
+              <div>
+                {
+                  this.state.image.notes.map(note => {
+                    return <div key={note.id} className="note-card card light-back">
+                      <div className="card-header">
+                        <p className="card-subtitle text-gray">{note.created_at}</p>
+                        <button value={note.id} className="btn" onClick={this.handleDeleteNote}> <TiDelete /> </button>
+                      </div>
+                      <div className="card-body">{note.text}</div>
                     </div>
-                    <div className="card-body">{note.text}</div>
-                  </div>
-                })
-              }
-              <form className="form-group" onSubmit={this.handleSubmit}>
-                <input
-                  className="form-input"
-                  type="text"
-                  name="text"
-                  onChange={this.handleChange}
-                  value={this.state.text || ''}
-                  placeholder="Make a note to yourself"
-                />
-                <button className="btn" type="submit">Add</button>
-              </form>
+                  })
+                }
+                <form className="form-group note-form" onSubmit={this.handleSubmit}>
+                  <input
+                    className="form-input"
+                    type="text"
+                    name="text"
+                    onChange={this.handleChange}
+                    value={this.state.text || ''}
+                    placeholder="Make a note to yourself"
+                  />
+                  <br />
+                  <button className="btn" type="submit">Add</button>
+                </form>
+              </div>
             </div>
             <div>
+              <h2>Done with this?</h2>
+              <br />
               <button className="btn primary-btn" onClick={this.handleDelete}>Delete Project</button>
             </div>
           </div>
