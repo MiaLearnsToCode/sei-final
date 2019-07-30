@@ -11,7 +11,7 @@ class Login extends React.Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
-  
+
   handleChange(e) {
     const data = {...this.state.data, [e.target.name]: e.target.value}
     this.setState({ data, errors: ''})
@@ -32,42 +32,42 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div className="container columns">
-        <div className="column intro-section col-6">
+      <div className='container columns'>
+        <div className='column intro-section col-6'>
           <h1>Yarn: Embroidery Made Simple</h1>
           <br />
           <p>Turn any image into an embroidery friendly design & keep track of your progress.</p>
         </div>
-        <div className="form-group column col-4" >
-          <form onSubmit={this.handleSubmit} className="flex-form">
-            <h2 className="text-center">Sign In</h2>
+        <div className='form-group column col-4' >
+          <form onSubmit={this.handleSubmit} className='flex-form'>
+            <h2 className='text-center'>Sign In</h2>
             {this.state.error &&
               <div>
-                <small className="is-erros">{this.state.error}</small>
+                <small className='is-erros'>{this.state.error}</small>
               </div>
             }
-            <label className="form-label">Email</label>
+            <label className='form-label'>Email</label>
             <input
-              className="form-input"
-              type="text"
-              name="email"
-              placeholder="Email"
+              className='form-input'
+              type='text'
+              name='email'
+              placeholder='Email'
               onChange={this.handleChange}
             />
-            <label className="form-label">Password</label>
+            <label className='form-label'>Password</label>
             <input
-              className="form-input"
-              type="password"
-              name="password"
-              placeholder="Password"
+              className='form-input'
+              type='password'
+              name='password'
+              placeholder='Password'
               onChange={this.handleChange}
             />
             <br />
-            <button className="btn input-group-btn"> Sign in </button>
+            <button className='btn input-group-btn'> Sign in </button>
             <br />
-            <div className="light-back text-center register-section">
+            <div className='light-back text-center register-section'>
               <p>New here?</p>
-              <Link to="/register" className="c-hand">Register a new account</Link>
+              <Link to='/register' className='c-hand'>Register a new account</Link>
             </div>
           </form>
         </div>

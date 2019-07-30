@@ -29,6 +29,7 @@ class App extends React.Component {
             <Route path='/register' component={Register}/>
             <Route path='/error' component={Error}/>
             <Route exact path='/' component={Login}/>
+            <Route path='/*' component={Error}/>  
           </Switch>
           <Footer />
         </div>

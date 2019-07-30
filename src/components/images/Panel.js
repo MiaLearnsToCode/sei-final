@@ -9,39 +9,39 @@ const Panel = ({title, url, pixels, difficulty, id}) => {
   const progress = (ticked * 100)/all
 
   return(
-    <div className="panel col-3">
-      <div className="panel-header text-center">
-        <figure className="avatar avatar-xl"><img src={url} alt="Avatar"/></figure>
+    <div className='panel col-3'>
+      <div className='panel-header text-center'>
+        <figure className='avatar avatar-xl'><img src={url} alt={title}/></figure>
       </div>
-      <div className="panel-body">
-        <div className="tile tile-centered">
-          <div className="tile-content">
-            <h4 className="bold">{title}</h4>
+      <div className='panel-body'>
+        <div className='tile tile-centered'>
+          <div className='tile-content'>
+            <h4 className='bold'>{title}</h4>
           </div>
         </div>
-        <div className="tile tile-centered">
-          <div className="tile-content">
+        <div className='tile tile-centered'>
+          <div className='tile-content'>
             <h5>Difficulty:</h5>
-            <div className="chip">{difficulty.level}</div>
+            <div className='chip'>{difficulty.level}</div>
           </div>
         </div>
         <br />
         <hr />
         <br />
-        <div className="tile tile-centered">
-          <div className="tile-content">
-            <div className="title text-bold">You have completed:</div>
+        <div className='tile tile-centered'>
+          <div className='tile-content'>
+            <div className='title text-bold'>You have completed:</div>
             <progress
-              className="progress"
+              className='progress'
               value={ticked === 0 ? 0 : progress}
-              max="100"
+              max='100'
             >
             </progress>
           </div>
         </div>
       </div>
-      <div className="panel-footer">
-        <Link to={`/projects/${id}`} className="btn">Continue this project</Link>
+      <div className='panel-footer'>
+        <Link to={`/projects/${id}`} className='btn'>Continue this project</Link>
       </div>
     </div>
   )

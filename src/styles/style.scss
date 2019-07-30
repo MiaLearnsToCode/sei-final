@@ -10,6 +10,12 @@ a:hover {
   text-decoration: none;
 }
 
+.avatar {
+  img {
+    object-fit: cover;
+  }
+}
+
 body {
   background-color: $dark-color;
   color: $primary-color;
@@ -84,9 +90,24 @@ body {
   padding: 30px 0px;
 }
 
+form {
+  a {
+    color:$dark-color;
+  }
+}
+
 .form-input {
   background: $asphalt;
   color: $primary-color;
+}
+
+.footer-section {
+  display: flex;
+  align-items: center;
+}
+
+.github-logo {
+  height:50px;
 }
 
 header {
@@ -102,17 +123,30 @@ header {
   }
 }
 
+.image-preview {
+  height: 500px;
+  width: 500px;
+  img {
+    object-fit: cover;
+    height: 500px;
+    width: 500px;
+  }
+}
+
 .input-inline {
   margin: 30px 0px;
 }
+
+
+.intro-section {
+  margin: 150px 100px 0px 0px;
+}
+
 
 .light-back {
   background-color: $asphalt;
 }
 
-.intro-section {
-  margin: 150px 100px 0px 0px;
-}
 
 .note-card {
   display: flex;
@@ -130,7 +164,7 @@ header {
 }
 
 .panel {
-  margin: 0px 50px 20px 0px;
+  margin: 0px 80px 30px 0px;
   background-color: $asphalt;
   border: none;
   border-radius: 10px;
@@ -172,6 +206,11 @@ header {
   margin: 80px 0px;
 }
 
+.spinner {
+  height: 300px;
+  margin-left: 40%
+}
+
 .note-form {
   display: flex;
 }
@@ -182,34 +221,4 @@ header {
 
 .pixel:hover {
   border: 3px solid #212121;
-}
-
-.avatar {
-  img {
-    object-fit: cover;
-  }
-}
-
-.image-preview {
-  height: 500px;
-  width: 500px;
-  img {
-    object-fit: cover;
-    height: 500px;
-    width: 500px;
-  }
-}
-
-.spinner {
-  height: 300px;
-  margin-left: 40%
-}
-
-.github-logo {
-  height:50px;
-}
-
-.footer-section {
-  display: flex;
-  align-items: center;
 }

@@ -26,56 +26,56 @@ class Register extends React.Component {
 
   render() {
     return(
-      <div className="container">
-        <div className="form-group">
-          <form onSubmit={this.handleSubmit} className="flex-form register-form">
+      <div className='container'>
+        <div className='form-group'>
+          <form onSubmit={this.handleSubmit} className='flex-form register-form'>
             <h2>Sign Up</h2>
-            <label className="form-label">Username</label>
+            <label className='form-label'>Username</label>
             <input
-              className="form-input"
+              className='form-input'
               value= {this.state.data.username || ''}
-              type="text"
-              name="username"
-              placeholder="Username"
+              type='text'
+              name='username'
+              placeholder='Username'
               onChange={this.handleChange}
             />
-            {this.state.errors.username && <small className="is-error">{this.state.errors.username}</small>}
+            {this.state.errors.username && <small className='is-error'>{this.state.errors.username}</small>}
             <br />
-            <label className="form-label">Email</label>
+            <label className='form-label'>Email</label>
             <input
-              className="form-input"
+              className='form-input'
               value= {this.state.data.email || ''}
-              name="email"
-              placeholder="Email"
+              name='email'
+              placeholder='Email'
               onChange={this.handleChange}
             />
-            {this.state.errors.email && <small className="is-error">{this.state.errors.email}</small>}
+            {this.state.errors.email && <small className='is-error'>{this.state.errors.email}</small>}
             <br />
-            <label className="form-label">Password</label>
+            <label className='form-label'>Password</label>
             <input
-              className="form-input"
+              className='form-input'
               value= {this.state.data.password || ''}
-              type="password"
-              name="password"
-              placeholder="Password"
+              type='password'
+              name='password'
+              placeholder='Password'
               onChange={this.handleChange}
             />
-            {this.state.errors.password && <small className="is-error">{this.state.errors.password}</small>}
+            {this.state.errors.password && <small className='is-error'>{this.state.errors.password}</small>}
             <br />
-            <label className="form-label">Password Confirmation</label>
+            <label className='form-label'>Password Confirmation</label>
             <input
-              className="form-input"
+              className='form-input'
               value= {this.state.data.password_confirmation || ''}
-              type="password"
-              name="password_confirmation"
-              placeholder="Password Confirmation"
+              type='password'
+              name='password_confirmation'
+              placeholder='Password Confirmation'
               onChange={this.handleChange}
             />
-            {this.state.errors.password_confirmation && <small className="is-error">{this.state.errors.password_confirmation}</small>}
+            {this.state.errors.password_confirmation && <small className='is-error'>{this.state.errors.password_confirmation}</small>}
             <br />
             <div>
               <br />
-              <button className="btn input-group-btn"> Sign up </button>
+              <button className='btn input-group-btn'> Sign up </button>
             </div>
           </form>
         </div>

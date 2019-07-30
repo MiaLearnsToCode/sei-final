@@ -42,49 +42,49 @@ class New extends React.Component {
   render() {
     if (!this.state.data && !this.state.difficulties[0]) return null
     return(
-      <div className="columns container">
-        <div className="col-7">
+      <div className='columns container'>
+        <div className='col-7'>
           {
             !this.state.data.url &&
-            <div className="empty image-preview">
-              <p className="empty-title h5">Image Preview</p>
+            <div className='empty image-preview'>
+              <p className='empty-title h5'>Image Preview</p>
             </div>
           }
           {
             this.state.data.url &&
-            <div className="image-preview">
+            <div className='image-preview'>
               <img src={this.state.data.url}/>
             </div>
           }
           <img />
         </div>
-        <div className="col-5 form-group" >
+        <div className='col-5 form-group' >
           <form onSubmit={this.handleSubmit}>
             <h2>Create a new project</h2>
-            <label className="form-label">Title</label>
+            <label className='form-label'>Title</label>
             <input
-              className="form-input"
-              type="text"
-              name="title"
-              placeholder="Project title"
+              className='form-input'
+              type='text'
+              name='title'
+              placeholder='Project title'
               onChange={this.handleChange}
             />
-            {this.state.errors.title && <small className="is-error">{this.state.errors.title}</small>}
+            {this.state.errors.title && <small className='is-error'>{this.state.errors.title}</small>}
             <br />
-            <label className="form-label">Url</label>
+            <label className='form-label'>Url</label>
             <input
-              className="form-input"
-              name="url"
-              placeholder="Image url (preferrably ending in .jpg)"
+              className='form-input'
+              name='url'
+              placeholder='Image url (preferrably ending in .jpg)'
               onChange={this.handleChange}
             />
-            {this.state.errors.url && <small className="is-error">{this.state.errors.url}</small>}
+            {this.state.errors.url && <small className='is-error'>{this.state.errors.url}</small>}
             <br />
-            <label className="form-label">Difficulty Level</label>
-            {!this.state.data.difficulty_id && <p className="is-error label">Please pick a difficulty:</p>}
+            <label className='form-label'>Difficulty Level</label>
+            {!this.state.data.difficulty_id && <p className='is-error label'>Please pick a difficulty:</p>}
             <br />
-            {this.state.data.difficulty_id && <p className="is-error"> </p>}
-            <div className="btn-group btn-group-block">
+            {this.state.data.difficulty_id && <p className='is-error'> </p>}
+            <div className='btn-group btn-group-block'>
               {
                 this.state.difficulties[0] &&
                 this.state.difficulties.map(difficulty => {
@@ -100,8 +100,8 @@ class New extends React.Component {
             </div>
             <br />
             <hr />
-            <div className="project-submit">
-              <button className="btn input-group-btn"> Create </button>
+            <div className='project-submit'>
+              <button className='btn input-group-btn'> Create </button>
             </div>
           </form>
         </div>
