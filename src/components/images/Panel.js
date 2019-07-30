@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const Panel = ({title, url, pixels, difficulty, id}) => {
+  // VARIABLES THAT CONTROL THE PROGRESS BAR
   const all = pixels.length
   const tickedArray = pixels.filter(pixel => pixel.ticked)
   const ticked = tickedArray.length

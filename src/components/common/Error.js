@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+// catch page
 const Error = () => {
   return(
     <div className="container">

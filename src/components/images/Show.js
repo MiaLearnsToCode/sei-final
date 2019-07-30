@@ -14,6 +14,8 @@ class Show extends React.Component {
     this.handleDeleteNote = this.handleDeleteNote.bind(this)
   }
 
+  // --PIXELS AND COLORS GENERATORS--
+  // function that generates the pixels grid (only the first time the visitor visits the page)
   generatePixels() {
     axios.post(`/api/images/${this.props.match.params.id}/pixels`, null, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
@@ -22,6 +24,7 @@ class Show extends React.Component {
       .catch(() => this.props.history.push('/error'))
   }
 
+  // function that generates the colors histogram (only the first time the visitor visits the page)
   generateColors() {
     axios.post(`/api/images/${this.props.match.params.id}/colors`, null, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
@@ -30,6 +33,7 @@ class Show extends React.Component {
       .catch(() => this.props.history.push('/error'))
   }
 
+  // function that fetches the image's data
   getImage() {
     axios.get(`/api/images/${this.props.match.params.id}`, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
@@ -50,17 +54,21 @@ class Show extends React.Component {
     this.getImage()
   }
 
+  // the pixels are not stored in order of their id, so without this function the image is distorted
   sortPixels() {
     return this.state.image.pixels.sort(function(a, b){
       return a.id-b.id
     })
   }
 
+  // ensure that none of the colors returned in the color histogram are the same
   uniqueColors(array, key) {
     const unique = array.map(e => e[key]).map((e, i, final) => final.indexOf(e) === i && i).filter(e => array[e]).map(e => array[e])
     return unique
   }
 
+  // --EVENT LISTENERS--
+  // handler for when a pixel is clicked
   completed(pixel) {
     const data = {'ticked': true}
     axios.put(`/api/images/${this.props.match.params.id}/pixels/${pixel.id}`, data, {
@@ -70,6 +78,8 @@ class Show extends React.Component {
       .catch(() => this.props.history.push('/error'))
   }
 
+  // --Pixels filter--
+  // handles the filter chips (when one is clicked only the pixels of that color are displayed)
   filterColors(hex) {
     this.setState({ filterColor: hex })
   }
@@ -78,10 +88,24 @@ class Show extends React.Component {
     this.setState({ filterColor: ''})
   }
 
+
+  // function that deletes a project
+  handleDelete() {
+    axios.delete(`/api/images/${this.props.match.params.id}`, {
+      headers: { Authorization: `Bearer ${Auth.getToken()}` }
+    })
+      .then(() => this.props.history.push('/dashboard'))
+      .catch(() => this.props.history.push('/error'))
+  }
+
+
+  // ---NOTES---
+  // event listener in the notes input box
   handleChange(e) {
     this.setState({ text: e.target.value })
   }
 
+  // function that posts a note
   handleSubmit(e) {
     e.preventDefault()
     const data = { text: this.state.text }
@@ -93,14 +117,7 @@ class Show extends React.Component {
       .catch(() => this.props.history.push('/error'))
   }
 
-  handleDelete() {
-    axios.delete(`/api/images/${this.props.match.params.id}`, {
-      headers: { Authorization: `Bearer ${Auth.getToken()}` }
-    })
-      .then(() => this.props.history.push('/dashboard'))
-      .catch(() => this.props.history.push('/error'))
-  }
-
+  // function that deletes a note
   handleDeleteNote(id) {
     console.log(id)
     axios.delete(`/api/images/${this.props.match.params.id}/notes/${id}`, {
@@ -109,7 +126,6 @@ class Show extends React.Component {
       .then(() => this.getImage())
       .catch(() => this.props.history.push('/error'))
   }
-
 
   render() {
     if (!this.state.image.title) return null
