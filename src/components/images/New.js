@@ -75,7 +75,7 @@ class New extends React.Component {
             <input
               className="form-input"
               name="url"
-              placeholder="Image url (preferrably ending in .jpeg)"
+              placeholder="Image url (preferrably ending in .jpg)"
               onChange={this.handleChange}
             />
             {this.state.errors.url && <small className="is-error">{this.state.errors.url}</small>}
