@@ -1,2 +1,0 @@
-# sei-final
-Final Project
